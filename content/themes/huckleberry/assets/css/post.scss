@@ -1,0 +1,377 @@
+/* Variables
+================================================== */
+$main-color: #4a5689;
+$main-shade: #edeff5;
+$main-shade-light: #f8f9fb;
+$body-text: #565656;
+$overlay-text: #FFF;
+$light-grey: #e7e7e7;
+$medium-grey: #bdbdbd;
+$base-font-size: 14;
+$margin: $base-font-size * 1.6;
+$min-width: min-width; 
+$max-width: max-width; 
+$iphone-min: 320px; 
+$iphone-max: 568px;
+$ipad-min: 768px;
+$ipad-max: 1024px;
+
+/* Mixins
+================================================== */
+@mixin size($property, $px) {
+	#{$property}: #{$px}px; 
+	#{$property}: #{$px/10}rem;
+}
+
+@mixin calc($property, $expression) { 
+	#{$property}: -moz-calc(#{$expression}); 
+	#{$property}: -webkit-calc(#{$expression}); 
+	#{$property}: calc(#{$expression}); 
+} 
+
+@mixin iphone-wrapper-wide($property) {
+	#{$property}:  -moz-calc(100% - #{$margin}px);
+	#{$property}:  -webkit-calc(100% - #{$margin}px);
+	#{$property}: calc(100% - #{$margin}px);
+}
+
+@mixin iphone-wrapper($property) {
+	#{$property}: -moz-calc(100% - (#{$margin}px * 3));
+	#{$property}: -webkit-calc(100% - (#{$margin}px * 3));
+	#{$property}: calc(100% - (#{$margin}px * 3));
+}
+
+@mixin side-borders($property) {
+	#{$property}: -moz-calc(100% + (#{$margin}px));
+	#{$property}: -webkit-calc(100% + (#{$margin}px));
+	#{$property}: calc(100% + (#{$margin}px));
+}
+
+/* Article
+================================================== */
+
+.content {
+
+	.wrap-wide {
+		@include calc(width, "100% + #{$margin}px + 1px");
+		@include size(margin-left, $margin * -1/2);
+		float: left;
+	}
+
+	.wrap-full {
+		@include calc(width, "100% + #{$margin}px * 2 + 1px");
+		@include size(margin-left, -$margin);
+		float: left;
+	}	
+
+	.post {
+		@include size(padding-top, $margin * 2);
+		@include size(padding-bottom, $margin * 2);
+		position: relative;
+		float: left;
+		width: 100%;	
+
+		.post-date {  		
+	  		@include size(font-size, $base-font-size * 1.38);  		
+	  		color: $medium-grey;
+	  		margin-top: 0;
+	  		overflow: hidden;
+	  		text-align: center;
+
+	  		time {
+	  			position: relative;
+	  		}
+
+			time::before, 
+		  	time::after {
+				@include size(top, 12);
+				@include size(height, 1);
+				@include size(width, 768);
+				content: "";
+				display: block;
+				position: absolute;
+				background-color: $light-grey;  
+		  	}
+
+		  	time::before {
+				@include side-borders(right);
+			}
+
+			time::after {
+				@include side-borders(left);
+			}
+	  	}
+
+	  	.post-title {
+	  		@include size(font-size, $base-font-size * 4.2857);
+	  		@include size(margin-bottom, $margin * 2);	  		
+	  		color: $main-color;	
+	  		font-weight: 300;
+			line-height: 1em;
+			text-align: center;
+
+	  		a {
+	  			border: none;
+	  		}
+	  	}
+
+		.post-content {
+
+			pre {
+				overflow: hidden;
+				text-overflow: ellipsis;
+
+			    /* Non standard for webkit */
+			    word-break: break-word;
+
+				-webkit-hyphens: auto;
+			   	-moz-hyphens: auto;
+			    hyphens: auto;	
+			} 
+	    }
+
+	  	.post-intro,
+	  	.post-excerpt {
+	  		@include size(font-size, $base-font-size * 1.4286);	  		
+	  		line-height: 1.4em;
+	  		font-weight: 400;
+	  	}  	
+
+	  	.post-intro {
+	  		@include size(margin-bottom, $margin);
+	  	}	  	
+
+		blockquote {
+			@include calc(max-width, "100% + #{$margin}px");
+			@include calc(width, "100% + #{$margin}px");			
+			@include size(padding-top, $margin);
+			@include size(padding-right, $margin);				
+			@include size(padding-bottom, $margin);
+			@include size(padding-left, $margin * 3);
+			@include size(margin-top, $margin);
+			@include size(margin-bottom, $margin);
+			@include size(margin-left, $margin * -1/2);
+			@include size(border-left-width, 2);
+			@include size(font-size, $base-font-size * 1.3846);
+			position: relative;		
+			border-left-color: $main-color;
+			border-left-style: solid;
+			line-height: 1.4em; 
+			background-color: $main-shade;	
+
+			p:last-of-type {
+				margin-bottom: 0;
+			}		
+		}
+
+		blockquote::before {
+			@include size(left, $margin / 2);
+			@include size(top, $margin * 1.5);
+			@include size(font-size, 80);
+			content: "\201C";
+			display: block;
+			position: absolute;			
+			color: #fff;
+		}	
+
+		blockquote.float-left, 
+		blockquote.float-right {
+			margin-top: 0;
+			width: auto;
+		}
+
+		blockquote.float-right {
+			@include size(margin-left, $margin);
+			@include size(margin-right, $margin * -1/2);
+		}
+
+		pre {
+			@include size(padding, $margin);
+			background-color: $main-shade;
+		}
+
+		img, iframe, audio, embed, object {			
+			@include size(padding-top, $margin);			
+		}
+
+		img {
+			@include size(margin-bottom, $margin);
+			max-width: 100%; 
+			height: auto;
+		}
+
+		iframe, audio, embed, object, .fluid-width-video-wrapper {						
+			@include size(margin-bottom, $margin * 2);
+		}
+
+		.fluid-width-video-wrapper {
+			@include calc(width, "100% + #{$margin}px * 2 + 1px");
+			@include size(margin-left, -$margin);
+			position: relative;
+			padding-bottom: 20%;
+			height: 0;
+
+			iframe {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+			}
+		}
+
+		.post-footer {
+			@include size(margin-top, $margin * 2);
+			@include size(border-top-width, 1);
+			border-top-color: $light-grey;
+			border-top-style: solid;
+
+			.share {
+				@include size(padding-top, $margin * 2);
+				@include size(padding-bottom, $margin * 2);
+				text-align: center;
+
+				h4 {
+					@include size (font-size, $base-font-size);
+					line-height: 1.4em;
+					display: inline;
+					text-transform: uppercase;
+					letter-spacing: 0.1em;
+					color: $medium-grey;
+				}
+
+				a {
+					@include size (font-size, $base-font-size * 1.4);
+					@include size (padding-left, $margin / 2);
+				}
+			}			
+		}
+
+		.post-tags {						
+			@include size(padding-top, $margin / 2);
+			@include size(padding-bottom, $margin / 2);
+			margin-bottom: 0;
+			background-color: $main-shade-light;
+			text-align: center;
+		}
+
+		#author-block {			
+			@include size (padding, $margin);
+			position: relative;
+			float: left;
+			background-color: $main-shade;				
+		}
+
+		.author-has-img {
+
+			.author-img {
+				@include size(width, 75);
+				@include size(height, 75);
+				position: absolute;
+			}
+
+			img {
+				@include size(border-width, 4);
+				border-style: solid;
+				border-color: #fff;
+				padding-top: 0;
+			}
+
+			.author-wrap {				
+				@include size(min-height, 75);
+				@include size(margin-left, $margin + 75);
+			}
+		}	
+
+		.author-name {	
+			@include size(margin-bottom, $margin / 2);
+			float: left;				
+			margin-top: 0;
+			font-weight: 700;
+			line-height: 1em;			
+			text-align: left;	
+		}	
+
+		.author-bio {
+			@include size(font-size, 12);
+			float: left;
+			clear: left;			
+			line-height: 1.6em;
+		}
+
+		.author-link {
+			float: left;
+			margin-bottom: 0;
+			clear: left;
+
+			a {
+				font-weight: 400;
+			}
+		}
+	}
+}
+
+.single-post .post {
+	padding-bottom: 0;
+}
+
+
+/* Media Queries
+================================================== */
+
+/* iPad & iPad mini */
+@media only screen and ($min-width : $ipad-min) {
+
+	.content {
+		@include size(padding-left, $margin * 4);
+		@include size(padding-right, $margin * 4);
+
+		.wrap-wide {
+			@include calc(width, "100% + #{$margin}px * 4 + 1px");
+			@include size(margin-left, $margin * -2);
+		}
+
+		.wrap-full,
+		.post .fluid-width-video-wrapper {
+			@include calc(width, "100% + #{$margin}px * 8 + 1px");
+			@include size(margin-left, $margin * -4);
+		}
+
+		.post {
+			blockquote {
+				@include calc(max-width, "100% + #{$margin}px * 4 + 1px");
+				@include calc(width, "100% + #{$margin}px * 4 + 1px");
+				@include size(margin-left, $margin * -2);
+			}
+
+			blockquote.float-left, 
+			blockquote.float-right {
+				margin-top: 0;
+				width: auto;
+			}
+
+			blockquote.float-right {
+				@include size(margin-left, $margin);
+				@include size(margin-right, $margin * -2);
+			}
+		}
+
+		#author-block {	 
+			@include size(padding-right, $margin * 4);
+			@include size(padding-left, $margin * 4);
+		}
+
+		.author-has-img { 
+
+			.author-img {
+				@include size(width, 120);
+				@include size(height, 120)
+			}
+
+			.author-wrap {				
+				@include size(min-height, 120);
+				@include size(margin-left, $margin + 120);
+			}
+		}
+	}
+}

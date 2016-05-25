@@ -1,0 +1,67 @@
+{{!< default}}
+
+{{! The comment above "< default" means - insert everything in this file into
+    the {body} of the default.hbs template, which contains our header/footer. }}
+
+{{! The big featured header on the homepage, with the site logo and description }}
+
+<header class="blog-header {{#if @blog.cover}}blog-cover{{/if}}" {{#if @blog.cover}}style="background-image: url({{@blog.cover}})"{{/if}}>
+
+    <h1 class="blog-title">
+        <a href="{{@blog.url}}">
+            {{#if @blog.logo}}
+                <img src="{{@blog.logo}}" alt="Blog Logo" />
+            {{else}}
+                {{@blog.title}}
+            {{/if}}
+        </a>
+    </h1>
+
+    <h3 class="blog-description">{{@blog.description}}</h3>
+</header>
+
+{{! Email Subscription }}
+<div style="margin-top: 20px;">
+<div class="email-div">
+    <form action="//nickpersico.us8.list-manage.com/subscribe/post?u=9933cf8ec7116f935a0aefa5f&amp;id=296bb084d9" method="post" novalidate>
+        <div class="email-div-left">
+            <input type="email" value="" name="EMAIL" id="mce-EMAIL" class="email-add" placeholder="Email Address">
+        </div>
+        <div class="email-div-right">
+            <input type="submit" value="Subscribe For Updates" name="subscribe" id="mc-embedded-subscribe" class="email-sub">
+        </div>
+    </form>
+</div>
+</div>
+
+
+{{! The main content area on the homepage }}
+<main class="content" role="main">
+
+    {{! Each post will be output using this markup }}
+    {{#foreach posts}}
+
+    <article class="{{post_class}}">
+        
+        <p class="post-date"><time datetime="{{date format="YYYY-MM-DD"}}">{{date format='DD MMM YYYY'}}</time></p>
+
+        <h2 class="post-title"><a href="{{url}}">{{{title}}}</a></h2>
+
+        <section class="post-excerpt align-center">
+            <p>{{excerpt words="20"}}&hellip;</p>
+
+            <p>
+                <a class="read-more" href="{{url}}">Continue</a>
+            </p>
+        </section>
+
+    </article>
+
+    {{/foreach}}
+
+    {{!! After all the posts, we have the previous/next pagination links }}
+    <div class="wrap-full">
+        {{pagination}}
+    </div>
+
+</main>

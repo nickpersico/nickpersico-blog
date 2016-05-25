@@ -1,2 +1,3 @@
-# nickpersico-blog
-A ghost blog for NickPersico.com
+# NickPersico.com Blog
+
+Will update this later.

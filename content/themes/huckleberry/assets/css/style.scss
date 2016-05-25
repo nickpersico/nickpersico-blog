@@ -1,0 +1,484 @@
+/* Variables
+================================================== */
+$main-color: #4a5689;
+$main-shade: #edeff5;
+$main-shade-light: #f8f9fb;
+$body-text: #565656;
+$overlay-text: #FFF;
+$light-grey: #e7e7e7;
+$medium-grey: #bdbdbd;
+$base-font-size: 14;
+$margin: $base-font-size * 1.6;
+$min-width: min-width; 
+$max-width: max-width; 
+$iphone-min: 320px; 
+$iphone-max: 568px;
+$ipad-min: 768px;
+$ipad-max: 1024px;
+
+/* Mixins
+================================================== */
+@mixin size($property, $px) {
+	#{$property}: #{$px}px; 
+	#{$property}: #{$px/10}rem;
+}
+
+@mixin calc($property, $expression) { 
+	#{$property}: -moz-calc(#{$expression}); 
+	#{$property}: -webkit-calc(#{$expression}); 
+	#{$property}: calc(#{$expression}); 
+} 
+
+@mixin iphone-wrapper-wide($property) {
+	#{$property}:  -moz-calc(100% - #{$margin}px);
+	#{$property}:  -webkit-calc(100% - #{$margin}px);
+	#{$property}: calc(100% - #{$margin}px);
+}
+
+@mixin iphone-wrapper($property) {
+	#{$property}: -moz-calc(100% - (#{$margin}px * 3));
+	#{$property}: -webkit-calc(100% - (#{$margin}px * 3));
+	#{$property}: calc(100% - (#{$margin}px * 3));
+}
+
+@mixin side-borders($property) {
+	#{$property}: -moz-calc(100% + (#{$margin}px * 2));
+	#{$property}: -webkit-calc(100% + (#{$margin}px * 2));
+	#{$property}: calc(100% + (#{$margin}px * 2));
+}
+
+/* 1.0 -- Baseline
+================================================== */
+
+/* 1.1 -- Reset ***/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline; 
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+body { line-height: 1; }
+ol, ul { list-style: none; }
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after { content: ''; content: none; }
+q:before { content: "\201C"; }
+q:after { content: "\201D"; }
+table { border-collapse: collapse; border-spacing: 0; }
+*, *:before, *:after {
+	-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+
+/* Structure
+================================================== */
+html {
+	background: url(../img/pw_pattern.png);
+	font-size: 62.5%;
+}
+
+body {	
+	@include size(max-width, 768);			    
+    margin: 0 auto;
+}
+
+.container {	
+	width: 100%;
+	float: left;
+	margin: {
+		@include size(top, $margin*2);
+		@include size(bottom, $margin);
+	}
+	background-color: #fff;
+}
+
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0; 
+}
+
+* {
+	-webkit-margin-before: 0;
+	-webkit-margin-after: 0;
+}
+
+/* Typography
+================================================== */
+
+/* Fonts ***/
+
+body {
+	@include size(font-size, $base-font-size);
+	font-family: "Merriweather";
+	font-weight: 300;
+	color: $body-text;	
+	line-height: 1.6em;
+}
+
+h1, h2, h3, h4, h5, h6, blockquote,
+.blog-header .author-name, #author-block .author-name, .post-date, .post-excerpt, .post-intro, .read-more, .pagination, .post-tags {
+	font-family: "Source Sans Pro";
+}
+
+pre, code, tt, kbd, samp {
+	font-family: Monaco, Courier, sans-serif;
+}
+
+/* Headers ***/
+
+h1, 
+h2, 
+h3, 
+h4, 
+h5, 
+h6 {	
+	margin: {
+		@include size(top, $margin * 2);
+		@include size(bottom, $margin);
+	}	
+}
+
+h1 {
+	@include size(font-size, $base-font-size * 4.615);
+	line-height: 1em;
+	font-weight: 700;
+}
+
+h2 {
+	@include size(font-size, $base-font-size * 2.3);
+	line-height: 1em;
+	font-weight: 300;
+}
+
+h3 {
+	@include size(font-size, $base-font-size * 1.846);
+	line-height: 1.2em;
+	font-weight: 300;
+}
+
+h4 {
+	@include size(font-size, $base-font-size * 1.38);
+	line-height: 1.4em;
+	font-weight: 700;
+}	
+
+h5 {
+	@include size(font-size, $base-font-size * 1.23);
+	line-height: 1.5em;
+	font-weight: 700;
+}
+
+h6 {
+	@include size(font-size, $base-font-size * 1.08);
+	letter-spacing: 0.1em;
+	line-height: 1.6em;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+p {
+	@include size(margin-bottom, $margin);
+	@include size(margin-bottom, $margin);
+}
+
+a {
+	@include size(border-bottom-width, 1);
+	border-bottom-style: solid;
+	border-bottom-color: $main-color; 
+	color: $main-color;	
+	text-decoration: none;
+
+	&:hover {
+		color: $body-text;
+	}
+}
+
+.read-more {
+	@include size(font-size, $base-font-size * .8571);
+	@include size(padding-top, $margin / 3);
+	@include size(padding-bottom, $margin / 3);
+	@include size(padding-left, $margin);
+	@include size(padding-right, $margin);
+	display: inline-block;
+	background-color: $main-color;
+	color: #fff;
+	font-weight: 300;
+	text-transform: uppercase;
+	text-decoration: none;
+	letter-spacing: 0.1em;		
+	cursor: pointer;
+
+	&:hover {
+		background-color: $body-text;
+		color: $light-grey;
+	}
+}
+
+a[class^="icon-"] {
+	border: none;
+}
+
+/* Lists ***/
+
+ul, ol, dl { 
+	@include size(margin-bottom, $margin);
+}
+
+ul { 
+	@include size(padding-left, 16);
+}
+
+ol {
+	@include size(padding-left, 22);
+}
+
+li { 
+	@include size(margin-bottom, $margin / 2);
+}
+
+ol ol,
+ul ul,
+ul ol, 
+ol ul {
+	margin: {
+		@include size(top, $margin/2);
+		@include size(left, $margin);
+		bottom: 0;
+	}
+}
+
+ul { 
+	list-style: disc; 
+}
+
+ul ul { 
+	list-style: circle; 
+}
+
+ol { 
+	list-style: decimal; 
+}
+
+ol ol { 
+	list-style: upper-roman; 
+}
+
+ol ol ol { 
+	list-style: lower-roman; 
+}
+
+dt { 
+	font-weight: 700; 
+}
+
+/* Other elements ***/
+
+blockquote {
+	font-weight: 400;
+}
+
+hr {
+	display: block;
+	@include size(height, 1);
+	@include size(margin-top, $margin * 2);
+	@include size(margin-bottom, $margin * 2);
+	@include size(width, $margin * 8);
+	margin-left: auto;
+	margin-right: auto;	
+	border: none;	
+	background-color: $light-grey;
+}
+
+hr::after {
+	@include size(font-size, $base-font-size * 1.4);
+	@include size(top, $base-font-size * -0.7);
+	content: "\2666";
+	display: inline-block;
+	position: relative;
+	width: 100%;	
+	color: $medium-grey;
+	text-align: center;	
+}
+
+iframe, object, embed {
+	max-width: 100%;
+}
+
+pre {
+	@include size(margin-bottom, $margin);
+}
+
+code {
+
+}
+
+strong, b { font-weight: 700; }
+
+i, em { font-style: italic; }
+
+/* Useful classes ***/
+
+.align-center { text-align: center; }
+.align-left { text-align: left; }
+.align-right { text-align: right; }
+
+.float-left { 
+	@include size(margin-right, $margin);
+	@include size(margin-bottom, $margin);
+	float: left; 
+}
+
+.float-right { 
+	@include size(margin-left, $margin);
+	@include size(margin-bottom, $margin);
+	float: right; 
+}
+
+.hidden {
+	position: absolute !important;
+	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+	clip: rect(1px, 1px, 1px, 1px);
+	padding: 0 !important;
+	border: 0 !important;
+	height: 1px !important;
+	width: 1px !important;
+	overflow: hidden;
+} 
+
+/* Header
+================================================== */
+
+.blog-header {
+	@include size(margin-bottom, $margin);
+	@include size(border-top-width, 4);
+	border-top-style: solid;
+	border-top-color: $main-color;
+
+	// @include size(padding-top, $margin * 2);
+	// @include size(padding-bottom, $margin * 2);
+	float: left;
+	width: 100%;
+	position: relative;  	
+  	text-align: center;
+
+  	.blog-logo {
+  		@include size(margin-top, $margin);
+  		@include size(max-height, $margin * 6);
+  		display: block;
+  		width: 100%;
+		border: none;  		
+
+		img {
+			max-width: 100%;
+			@include size(max-height, $margin * 6);
+		}
+  	}
+
+  	.blog-title {
+  		@include size(margin-top, $margin * 2);
+  		color: #fff;  		
+
+  		a {
+  			display: inline-block;  
+  			border: none;			
+  		}
+  	}
+
+  	.blog-description {  		
+  		@include size(font-size, $base-font-size * 1.38);  		
+  		@include size(margin-bottom, $margin * 2);  		
+  		margin-top: 0;
+  		overflow: hidden;
+  		color: #fff;
+  	}
+
+  	.blog-description::after {
+		@include size(height, 2);
+		@include size(width, 100);
+		@include size(margin-top, $margin);
+		content: "";
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		background-color: $main-color;
+  	}
+}
+
+/* Content
+================================================== */
+.content {	
+	width: 100%;
+	float: left;
+	border-bottom-color: $main-color;
+	border-bottom-style: solid;
+	@include size(border-bottom-width, 2);
+	@include size(padding-left, $margin);
+	@include size(padding-right, $margin);
+
+	.pagination {
+		position: relative;
+		@include size(padding, $margin); 		
+		background-color: $main-shade-light;
+		text-align: center;
+
+		.older-posts, 
+		.newer-posts {
+			position: absolute;
+			@include size(padding-top, $margin * 0.5);
+			@include size(padding-right, $margin);
+			@include size(padding-bottom, $margin * 0.5);
+			@include size(padding-left, $margin);
+			@include size(top, $margin * 0.5);
+			border: none;			
+			font-weight: 400;
+			text-transform: uppercase;
+			letter-spacing: 0.1em;			
+		}
+
+		.older-posts {
+			right: 0;
+		}
+
+		.newer-posts {
+			left: 0;
+		}
+	}
+
+	.back-to-top {
+		position: absolute;	
+		border: none;
+	}
+}
+
+/* Site Footer
+================================================== */
+
+.site-footer {
+	@include size(padding-bottom, $margin * 3);
+	@include size(font-size, $base-font-size * .8571);
+	font-style: italic;
+	text-align: center;	
+}
+
+.subscribe {
+	@include size(font-size, $base-font-size * 2);
+	@include size(padding-bottom, $margin);
+	display: inline-block;
+	border: none;
+}
+
+/* Media Queries
+================================================== */
+
+/* Retina */
+@media only screen and (-Webkit-min-device-pixel-ratio: 1.5), only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5) {
+
+	html {
+		background-image: url(../img/pw_pattern_@2X.png);
+	}
+}	
